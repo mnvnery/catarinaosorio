@@ -61,15 +61,15 @@ export default function Project({ data, projects, books }) {
                 ))}
         </EmblaCarousel>
         </div>
-        <div className="grid grid-cols-3">
-            <div className="font-decay text-center text-sm">
+        <div className="grid grid-cols-3 3xl:mt-5">
+            <div className="font-decay text-center text-sm 3xl:text-lg">
                 <div>{data.ano}</div>
                 <div>{data.local}</div>
             </div>
-            <div className="text-center text-lg font-bold 2xl:text-xl">{data.titulo}</div>
-            <div dangerouslySetInnerHTML={{__html: data.texto}} className='paragraph mr-20'/>
+            <div className="text-center text-lg font-bold 2xl:text-xl 3xl:text-2xl">{data.titulo}</div>
+            <div dangerouslySetInnerHTML={{__html: data.texto}} className='paragraph mr-20 2xl:mr-36 3xl:text-xl 3xl:mr-56'/>
         </div>
-        <div className="font-decay flex justify-between mx-14 text-sm my-12">
+        <div className="font-decay flex justify-between mx-14 text-sm my-12 3xl:text-lg 3xl:my-16">
             <div className="hover:underline">projeto anterior</div>
             <div className="hover:underline">projeto seguinte</div>
         </div>

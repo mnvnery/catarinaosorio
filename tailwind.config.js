@@ -11,6 +11,9 @@ module.exports = {
         grotta: ['Grotta-Regular', 'serif'],
         grottaMedium: ['Grotta-Medium', 'serif'],
       },
+      screens: {
+        '3xl': '2200px'
+      }
     },
   },
   plugins: [

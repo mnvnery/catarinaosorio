@@ -26,13 +26,13 @@ export async function getStaticProps() {
 
 function size(size) {
   if (size === 'small') {
-      return 'w-[20vw] h-[20vw] m-20 2xl:w-[25vw] 2xl:h-[25vw]'
+      return 'w-[20vw] h-[20vw] m-20'
   }
   if (size === 'medium') {
-      return 'w-[30vw] h-[30vw] m-10 2xl:w-[35vw] 2xl:h-[35vw]'
+      return 'w-[30vw] h-[30vw] m-10'
   }
   if (size === 'large') {
-      return 'w-[42vw] h-[42vw] 2xl:w-[47vw] 2xl:h-[50vw]'
+      return 'w-[42vw] h-[42vw]'
   }
 }
 

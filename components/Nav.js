@@ -37,7 +37,7 @@ return (
 <div>
     <button
     type="button"
-    className="ml-1 mr-1 h-8 w-8 rounded py-1"
+    className="ml-1 mr-1 h-8 w-8 rounded py-1 3xl:h-10 3xl:w-10"
     aria-label="Toggle Menu"
     onClick={onToggleNav}
     >
@@ -56,11 +56,11 @@ return (
     </svg>
     </button>
     <div
-    className={`absolute top-0 right-2.5 z-20 min-w-60 pb-10 2xl:min-w-[24vw] transform bg-orange-50 border border-orange-200 fill-white text-black duration-300 ease-in-out ${
+    className={`absolute top-0 right-2.5 z-20 min-w-60 pb-10 min-w-[19vw] 3xl:min-w-[15vw] 3xl:pb-14 transform bg-orange-50 border border-orange-200 fill-white text-black duration-300 ease-in-out ${
         navShow ? 'block' : 'hidden'
     }`}
     >
-    <div className="mt-1 float-right">
+    <div className="mt-1 float-right 3xl:mt-2 3xl:mr-2">
         <button
         type="button"
         className="mr-2 h-4 w-4 rounded"
@@ -81,7 +81,7 @@ return (
             </svg>
         </button>
     </div>
-    <nav className="mt-12 flex flex-col justify-between text-center 2xl:text-lg">
+    <nav className="mt-12 flex flex-col justify-between text-center 2xl:text-lg 3xl:text-xl">
         <div>
             {projects.map((project, i) => (
                 <div key={i} className="px-5 2xl:px-20">
