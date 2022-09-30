@@ -56,7 +56,7 @@ return (
     </svg>
     </button>
     <div
-    className={`absolute top-0 right-2.5 z-20 w-60 pb-10 transform bg-orange-50 border border-orange-200 fill-white text-black duration-300 ease-in-out ${
+    className={`absolute top-0 right-2.5 z-20 min-w-60 pb-10 2xl:min-w-[24vw] transform bg-orange-50 border border-orange-200 fill-white text-black duration-300 ease-in-out ${
         navShow ? 'block' : 'hidden'
     }`}
     >
@@ -73,7 +73,7 @@ return (
             height="12"
             viewBox="0 0 25 25"
             overflow="visible"
-            stroke="black"
+            stroke="rgb(254 215 170)"
             strokeWidth="3"
         >
             <line x2="25" y2="25" />
@@ -81,10 +81,10 @@ return (
             </svg>
         </button>
     </div>
-    <nav className="mt-12 flex flex-col justify-between text-center">
+    <nav className="mt-12 flex flex-col justify-between text-center 2xl:text-lg">
         <div>
             {projects.map((project, i) => (
-                <div key={i} className="px-5">
+                <div key={i} className="px-5 2xl:px-20">
                 <Link
                     href={`/projects/${project.slug}`}
                 >

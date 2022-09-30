@@ -48,7 +48,7 @@ export default function Project({ data, projects, books }) {
     return (
         <>
         <Header projects={projects} books={books} />
-        <div className="mt-[-1em]">
+        <div className="mt-[-1em] 2xl:mt-5">
         <EmblaCarousel>
                 {data.imagens.map((w, i) => (
                     <div className="embla__slide" key={i}>
@@ -66,7 +66,7 @@ export default function Project({ data, projects, books }) {
                 <div>{data.ano}</div>
                 <div>{data.local}</div>
             </div>
-            <div className="text-center text-lg font-bold">{data.titulo}</div>
+            <div className="text-center text-lg font-bold 2xl:text-xl">{data.titulo}</div>
             <div dangerouslySetInnerHTML={{__html: data.texto}} className='paragraph mr-20'/>
         </div>
         <div className="font-decay flex justify-between mx-14 text-sm my-12">

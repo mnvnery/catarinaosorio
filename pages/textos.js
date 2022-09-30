@@ -55,10 +55,10 @@ export default function Textos({textos, projects, books}) {
     return (
         <>
         <Header projects={projects} books={books}/>
-        <div className="text-center mt-24">
-            <div className="font-decay mb-4">Textos</div>
+        <div className="text-center mt-24 2xl:mt-36">
+            <div className="font-decay mb-4 2xl:text-xl">Textos</div>
             {textos.map((t, i) => (
-                <div key={i} className={`hover:underline leading-5`}>
+                <div key={i} className={`hover:underline leading-5 2xl:text-lg`}>
                     <button value={t.titulo} onClick={handleTag} className={`${selectedTitle === t.titulo ? 'underline' : '' }`}>{t.titulo}</button>
                 </div>
             ))}
@@ -67,9 +67,9 @@ export default function Textos({textos, projects, books}) {
             .slice(0)
             .map((t, i) => (
                 <div key={i}>
-                    <div className="mt-20 font-bold text-lg mb-12">{t.titulo}</div>
+                    <div className="mt-20 font-bold text-lg mb-12 2xl:text-lg 2xl:mt-28">{t.titulo}</div>
                     <div className="max-w-lg mx-auto text-left mb-14">
-                    <div dangerouslySetInnerHTML={{__html: t.texto}} className='paragraph text-sm'/>
+                    <div dangerouslySetInnerHTML={{__html: t.texto}} className='paragraph text-sm 2xl:text-base'/>
                     </div>
                 </div>
             ))}
