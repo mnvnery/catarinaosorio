@@ -17,8 +17,9 @@ export async function getStaticProps() {
 
   return {
     props: {
-      img, 
+      img: img.homePage, 
       projects: project.allProjects,
+      books: project.allLivros,
     },
   }
 }
@@ -40,7 +41,7 @@ function align(align) {
       return 'self-start mt-[16vh]'
   }
   if (align === 'middle') {
-      return 'self-center'
+      return 'self-center mt-[16vh]'
   }
   if (align === 'bottom') {
       return 'self-end'
@@ -50,15 +51,15 @@ function align(align) {
 
 
 
-export default function Home({img, projects}) {
+export default function Home({img, projects, books }) {
   const [randomArray, setRandomArray] = useState([]);
   useEffect(() => {
-      const randomizeArray = img.allImages.sort(() => 0.5 - Math.random());
+      const randomizeArray = img.imagens.sort(() => 0.5 - Math.random());
       setRandomArray(randomizeArray.slice(0, 2));
   }, []);
   return (
     <>
-    <Header projects={projects}/>
+    <Header projects={projects} books={books} />
     <div className='flex justify-between fixed top-0 left-0 w-full h-screen'>
       {randomArray.map((item, id) => (
         <div key={id} className={`relative ${size(item.tamanho)} ${align(item.alinhamento)}`}>

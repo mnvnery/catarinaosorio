@@ -75,6 +75,11 @@ a {
   padding-right: 15vw;
 }
 
+.embla__slide__books {
+  position: relative;
+  padding-right: 18vw;
+}
+
 .embla__slide__inner {
   position: relative;
   overflow: hidden;

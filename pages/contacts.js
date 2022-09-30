@@ -18,15 +18,16 @@ return {
     props: {
         contacts: contacts.contact,
         projects: project.allProjects,
+        books: project.allLivros,
     },
 }
 }
 
-export default function Contacts({contacts, projects}) {
+export default function Contacts({contacts, projects, books}) {
 
     return (
         <>
-        <Header projects={projects}/>
+        <Header projects={projects} books={books} />
         <div className="grid grid-cols-3 mx-10 mt-20">
             <div className="ml-10">
                 <div className="mb-5">Contactos</div>

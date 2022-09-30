@@ -4,37 +4,39 @@ import Header from "../../components/Header"
 import EmblaCarousel from '../../components/EmblaCarousel'
 import Image from "next/image"
 
-const FILTERED_QUERY = `query projectBySlug($slug: String) {
-    project(filter: {slug: {eq: $slug}}) {
+const FILTERED_QUERY = `query livroBySlug($slug: String) {
+    livro(filter: {slug: {eq: $slug}}) {
+        texto
         titulo
-        slug
         imagens {
             imagem {
-            url
+                url
+                width
+                height
             }
             tamanho
             alinhamento
         }
+        slug
         ano
-        local
-        texto
+        editor
     }
 }`
 function size(size) {
     if (size === 'small') {
-        return 'w-[20vw] h-[20vw] m-20'
+        return 'w-[20vw] h-fit'
     }
     if (size === 'medium') {
-        return 'w-[30vw] h-[30vw] m-10'
+        return 'w-[42vw] h-fit'
     }
     if (size === 'large') {
-        return 'w-[42vw] h-[42vw]'
+        return 'w-[42vw] h-fit'
     }
 }
 
 function align(align) {
     if (align === 'top') {
-        return 'self-start mt-[16vh]'
+        return 'self-start'
     }
     if (align === 'middle') {
         return 'self-center'
@@ -51,41 +53,37 @@ export default function Project({ data, projects, books }) {
         <div className="mt-[-1em]">
         <EmblaCarousel>
                 {data.imagens.map((w, i) => (
-                    <div className="embla__slide" key={i}>
+                    <div className="embla__slide__books flex" key={i}>
                         
                         <div className={`relative ${size(w.tamanho)} ${align(w.alinhamento)}`}>
-                            <Image src={w.imagem.url} objectFit="cover" layout="fill" />
+                            <Image src={w.imagem.url} width={w.imagem.width} height={w.imagem.height} objectFit='cover' />
                         </div>
                         
                     </div>
                 ))}
         </EmblaCarousel>
         </div>
-        <div className="grid grid-cols-3">
+        <div className="grid grid-cols-3 mb-14">
             <div className="font-decay text-center text-sm">
                 <div>{data.ano}</div>
-                <div>{data.local}</div>
+                <div>{data.editor}</div>
             </div>
             <div className="text-center text-lg font-bold">{data.titulo}</div>
             <div dangerouslySetInnerHTML={{__html: data.texto}} className='paragraph mr-20'/>
-        </div>
-        <div className="font-decay flex justify-between mx-14 text-sm my-12">
-            <div className="hover:underline">projeto anterior</div>
-            <div className="hover:underline">projeto seguinte</div>
         </div>
         </>
     )
 }
 export async function getStaticPaths() {
-    const projects = await request({
+    const data = await request({
         query: PROJECTS_QUERY,
     })
 
     return {
-        paths: projects.allProjects.map((project) => {
+        paths: data.allLivros.map((book) => {
         return {
             params: {
-            slug: project.slug,
+            slug: book.slug,
             },
         }
         }),
@@ -104,7 +102,7 @@ export async function getStaticProps({ params }) {
 
     return {
         props: {
-            data: data.project,
+            data: data.livro,
             projects: project.allProjects,
             books: project.allLivros,
         },

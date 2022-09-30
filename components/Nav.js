@@ -5,7 +5,7 @@ import Image from 'next/image'
 import siteMetadata from '../data/siteMetadata'
 
 
-const Nav = ({projects}) => {
+const Nav = ({projects, books}) => {
 const [navShow, setNavShow] = useState(false)
 
 const onToggleNav = () => {
@@ -15,6 +15,19 @@ setNavShow((status) => {
     } else {
     // Prevent scrolling
     document.body.style.overflow = 'hidden'
+    }
+    return !status
+})
+}
+
+const [subNavShow, setSubNavShow] = useState(false)
+
+const onToggleSubNav = () => {
+setSubNavShow((status) => {
+    if (status) {
+    
+    } else {
+
     }
     return !status
 })
@@ -73,7 +86,7 @@ return (
             {projects.map((project, i) => (
                 <div key={i} className="px-5">
                 <Link
-                    href={`projects/${project.slug}`}
+                    href={`/projects/${project.slug}`}
                 >
                     <a onClick={onToggleNav}
                     className="leading-3 text-black tracking-widest">{project.titulo}
@@ -83,21 +96,26 @@ return (
             ))}
         </div>
         <div className='mt-8'>
-        {headerNavLinks.map((link) => (
-            <div key={link.title} className="px-5">
-            <Link
-                href={link.href} 
-            >
-                <a onClick={onToggleNav}
-                className="leading-3 text-black font-decay tracking-widest">{link.title}
-                </a>
-            </Link>
+            <div><button onClick={onToggleSubNav} className="leading-3 text-black font-decay tracking-widest">Livros</button></div>
+            <div className={`${subNavShow ? 'block' : 'hidden'} mb-5 mt-2`}>
+                {books.map((book, i) => (
+                    <div key={i} className="px-5">
+                    <Link
+                        href={`/books/${book.slug}`}
+                    >
+                        <a onClick={onToggleNav}
+                        className="leading-3 text-black tracking-widest">{book.titulo}
+                        </a>
+                    </Link>
+                    </div>
+                ))}
             </div>
-        ))}
+            <div><Link href='/expos'><a onClick={onToggleNav} className="leading-3 text-black font-decay tracking-widest">Exposições</a></Link></div>
+            <div><Link href='/textos'><a onClick={onToggleNav} className="leading-3 text-black font-decay tracking-widest">Textos</a></Link></div>
         </div>
         <div className='mt-3'>
-            <div><Link href='/contacts'><a className='leading-3 font-decay tracking-widest'>Bio</a></Link></div>
-            <div><Link href='/contacts'><a className='leading-3 font-decay tracking-widest'>Contactos</a></Link></div>
+            <div><Link href='/contacts'><a onClick={onToggleNav} className='leading-3 font-decay tracking-widest'>Bio</a></Link></div>
+            <div><Link href='/contacts'><a onClick={onToggleNav} className='leading-3 font-decay tracking-widest'>Contactos</a></Link></div>
         </div>
     </nav>
     </div>
