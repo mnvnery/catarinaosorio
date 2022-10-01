@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Link from 'next/link'
 import headerNavLinks from '../data/headerNavLinks'
 import Image from 'next/image'
@@ -8,30 +8,32 @@ import siteMetadata from '../data/siteMetadata'
 const Nav = ({projects, books}) => {
 const [navShow, setNavShow] = useState(false)
 
-const onToggleNav = () => {
-setNavShow((status) => {
-    if (status) {
-    document.body.style.overflow = 'auto'
-    } else {
-    // Prevent scrolling
-    document.body.style.overflow = 'hidden'
-    }
-    return !status
-})
-}
 
+const ref = useRef()
 const [subNavShow, setSubNavShow] = useState(false)
 
 const onToggleSubNav = () => {
-setSubNavShow((status) => {
-    if (status) {
-    
-    } else {
-
-    }
-    return !status
-})
+    setSubNavShow((status) => {
+        return !status
+    })
 }
+
+useEffect(() => {
+    const checkIfClickedOutside = e => {
+        // If the menu is open and the clicked target is not within the menu,
+        // then close the menu
+        if (navShow && ref.current && !ref.current.contains(e.target)) {
+        setNavShow(false)
+        }
+    }
+
+    document.addEventListener("mousedown", checkIfClickedOutside)
+
+    return () => {
+        // Cleanup the event listener
+        document.removeEventListener("mousedown", checkIfClickedOutside)
+    }
+}, [navShow])
 
 return (
 <div>
@@ -39,7 +41,7 @@ return (
     type="button"
     className="ml-1 mr-1 h-8 w-8 rounded py-1 3xl:h-10 3xl:w-10"
     aria-label="Toggle Menu"
-    onClick={onToggleNav}
+    onClick={() => setNavShow(true)}
     >
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -55,17 +57,18 @@ return (
         />
     </svg>
     </button>
+    {setNavShow &&(
     <div
-    className={`absolute top-0 right-2.5 z-20 min-w-60 pb-10 min-w-[19vw] 3xl:min-w-[15vw] 3xl:pb-14 transform bg-orange-50 border border-orange-200 fill-white text-black duration-300 ease-in-out ${
+    className={`fixed top-2 md:absolute md:top-0 right-1.5 md:right-2.5 z-20 min-w-60 pb-10 min-w-[97vw] md:min-w-[19vw] 3xl:min-w-[15vw] 3xl:pb-14 transform bg-orange-50 border border-orange-200 fill-white text-black duration-300 ease-in-out ${
         navShow ? 'block' : 'hidden'
-    }`}
+    }`} ref={ref}
     >
-    <div className="mt-1 float-right 3xl:mt-2 3xl:mr-2">
+    <div className="mt-3.5 mr-1 md:mt-1 md:mr-0 float-right 3xl:mt-2 3xl:mr-2">
         <button
         type="button"
         className="mr-2 h-4 w-4 rounded"
         aria-label="Toggle Menu"
-        onClick={onToggleNav}
+        onClick={() => setNavShow(false)}
         >
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -81,14 +84,14 @@ return (
             </svg>
         </button>
     </div>
-    <nav className="mt-12 flex flex-col justify-between text-center 2xl:text-lg 3xl:text-xl">
+    <nav className="mt-20 md:mt-12 flex flex-col justify-between text-center 2xl:text-lg 3xl:text-xl">
         <div>
             {projects.map((project, i) => (
                 <div key={i} className="px-5 2xl:px-20">
                 <Link
                     href={`/projects/${project.slug}`}
                 >
-                    <a onClick={onToggleNav}
+                    <a
                     className="leading-3 text-black tracking-widest">{project.titulo}
                     </a>
                 </Link>
@@ -103,22 +106,23 @@ return (
                     <Link
                         href={`/books/${book.slug}`}
                     >
-                        <a onClick={onToggleNav}
+                        <a
                         className="leading-3 text-black tracking-widest">{book.titulo}
                         </a>
                     </Link>
                     </div>
                 ))}
             </div>
-            <div><Link href='/expos'><a onClick={onToggleNav} className="leading-3 text-black font-decay tracking-widest">Exposições</a></Link></div>
-            <div><Link href='/textos'><a onClick={onToggleNav} className="leading-3 text-black font-decay tracking-widest">Textos</a></Link></div>
+            <div><Link href='/expos'><a className="leading-3 text-black font-decay tracking-widest">Exposições</a></Link></div>
+            <div><Link href='/textos'><a className="leading-3 text-black font-decay tracking-widest">Textos</a></Link></div>
         </div>
         <div className='mt-3'>
-            <div><Link href='/contacts'><a onClick={onToggleNav} className='leading-3 font-decay tracking-widest'>Bio</a></Link></div>
-            <div><Link href='/contacts'><a onClick={onToggleNav} className='leading-3 font-decay tracking-widest'>Contactos</a></Link></div>
+            <div><Link href='/contacts'><a className='leading-3 font-decay tracking-widest'>Bio</a></Link></div>
+            <div><Link href='/contacts'><a className='leading-3 font-decay tracking-widest'>Contactos</a></Link></div>
         </div>
     </nav>
     </div>
+    )}
 </div>
 )
 }
