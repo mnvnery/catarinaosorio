@@ -26,13 +26,13 @@ export async function getStaticProps() {
 
 function size(size) {
   if (size === 'small') {
-      return 'w-[20vw] h-[20vw] m-20'
+      return 'h-[30vh] w-[35vw] md:w-[20vw] md:h-[20vw] md:m-20'
   }
   if (size === 'medium') {
-      return 'w-[30vw] h-[30vw] m-10'
+      return 'h-[42vh] w-[40vw] md:w-[30vw] md:h-[30vw] md:m-10'
   }
   if (size === 'large') {
-      return 'w-[42vw] h-[42vw]'
+      return 'w-[48vw] h-[60vh] md:w-[42vw] md:h-[42vw]'
   }
 }
 
@@ -60,7 +60,7 @@ export default function Home({img, projects, books }) {
   return (
     <>
     <Header projects={projects} books={books} />
-    <div className='flex justify-between fixed top-0 left-0 w-full h-screen'>
+    <div className='flex justify-between fixed top-0 left-0 w-full h-[80vh] md:h-screen'>
       {randomArray.map((item, id) => (
         <div key={id} className={`relative ${size(item.tamanho)} ${align(item.alinhamento)}`}>
           <Image src={item.imagem.url} layout='fill' objectFit='cover'/>
