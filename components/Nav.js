@@ -59,7 +59,7 @@ return (
     </button>
     {setNavShow &&(
     <div
-    className={`fixed top-2 md:absolute md:top-0 right-1.5 md:right-2.5 z-20 min-w-60 pb-10 min-w-[97vw] md:min-w-[19vw] 3xl:min-w-[15vw] 3xl:pb-14 transform bg-orange-50 border border-orange-200 fill-white text-black duration-300 ease-in-out ${
+    className={`fixed top-2 md:absolute md:top-0 right-1.5 md:right-2.5 z-20 min-w-60 pb-10 min-w-[97vw] md:min-w-[28vw] 3xl:min-w-[22vw] 3xl:pb-14 transform bg-orange-50 border border-orange-200 fill-white text-black duration-300 ease-in-out ${
         navShow ? 'block' : 'hidden'
     }`} ref={ref}
     >
@@ -84,9 +84,22 @@ return (
             </svg>
         </button>
     </div>
-    <nav className="mt-20 md:mt-12 flex flex-col justify-between text-center 2xl:text-lg 3xl:text-xl">
+    <nav className="mt-20 md:mt-12 flex flex-col justify-between text-center md:text-sm 2xl:text-lg 3xl:text-xl">
         <div>
-            {projects.map((project, i) => (
+            {projects.filter(project => project.lista == 'lista 1').map((project, i) => (
+                <div key={i} className="px-5 2xl:px-20">
+                <Link
+                    href={`/projects/${project.slug}`}
+                >
+                    <a
+                    className="leading-3 text-black tracking-widest">{project.titulo}
+                    </a>
+                </Link>
+                </div>
+            ))}
+        </div>
+        <div className='mt-4 3xl:mt-6'>
+            {projects.filter(project => project.lista == 'lista 2').map((project, i) => (
                 <div key={i} className="px-5 2xl:px-20">
                 <Link
                     href={`/projects/${project.slug}`}
