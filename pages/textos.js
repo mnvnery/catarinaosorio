@@ -68,8 +68,8 @@ export default function Textos({textos, projects, books}) {
             .map((t, i) => (
                 <div key={i}>
                     <div className="mt-20 font-bold text-lg mb-12 2xl:text-xl 2xl:mt-28 3xl:text-2xl">{t.titulo}</div>
-                    <div className="max-w-lg mx-auto text-left mb-14 3xl:max-w-xl">
-                    <div dangerouslySetInnerHTML={{__html: t.texto}} className='paragraph text-sm 2xl:text-base 3xl:text-xl'/>
+                    <div className="max-w-xs md:max-w-lg mx-auto text-left mb-14 3xl:max-w-xl">
+                        <div dangerouslySetInnerHTML={{__html: t.texto}} className='paragraph text-sm 2xl:text-base 3xl:text-xl'/>
                     </div>
                 </div>
             ))}

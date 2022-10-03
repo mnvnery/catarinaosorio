@@ -2,7 +2,7 @@ import { IoMdArrowDropright, IoMdArrowDropleft } from 'react-icons/io'
 
 export const PrevButton = ({ enabled, onClick }) => (
     <button
-        className="embla__button embla__button--prev"
+        className="embla__button left-1 md:left-4"
         onClick={onClick}
         disabled={!enabled}
     >
@@ -14,7 +14,7 @@ export const PrevButton = ({ enabled, onClick }) => (
 
     export const NextButton = ({ enabled, onClick }) => (
     <button
-        className="embla__button embla__button--next"
+        className="embla__button right-2"
         onClick={onClick}
         disabled={!enabled}
     >
