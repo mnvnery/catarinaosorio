@@ -24,13 +24,13 @@ const FILTERED_QUERY = `query livroBySlug($slug: String) {
 }`
 function size(size) {
     if (size === 'small') {
-        return 'w-[20vw] h-fit'
+        return 'w-[40vw] md:w-[20vw] h-fit'
     }
     if (size === 'medium') {
-        return 'w-[42vw] h-fit'
+        return 'w-[104vw] md:w-[42vw] h-fit'
     }
     if (size === 'large') {
-        return 'w-[42vw] h-fit'
+        return 'w-[103vw] h-[50vh] md:w-[42vw] md:h-fit'
     }
 }
 
@@ -63,13 +63,14 @@ export default function Project({ data, projects, books }) {
                 ))}
         </EmblaCarousel>
         </div>
-        <div className="grid grid-cols-3 mb-14 3xl:mb-24 3xl:mt-5">
+        <div className="mx-8 grid grid-cols-2 justify-center items-center md:justify-start md:items-start md:grid-cols-3 md:mx-0 mb-14 3xl:mb-24 3xl:mt-5">
+        <div className="md:hidden text-center text-lg font-bold 2xl:text-xl 3xl:text-2xl">{data.titulo}</div>
             <div className="font-decay text-center text-sm 3xl:text-lg">
                 <div>{data.ano}</div>
                 <div>{data.editor}</div>
             </div>
-            <div className="text-center text-lg font-bold 2xl:text-xl 3xl:text-2xl">{data.titulo}</div>
-            <div dangerouslySetInnerHTML={{__html: data.texto}} className='paragraph mr-20 2xl:mr-36 3xl:text-xl 3xl:mr-56'/>
+            <div className="hidden md:block text-center text-lg font-bold 2xl:text-xl 3xl:text-2xl">{data.titulo}</div>
+            <div dangerouslySetInnerHTML={{__html: data.texto}} className='paragraph mt-10 col-span-2 md:mt-0 md:ml-0 md:col-span-1 md:mr-20 2xl:mr-36 3xl:text-xl 3xl:mr-56'/>
         </div>
         </>
     )

@@ -3,9 +3,10 @@ import { PROJECTS_QUERY } from '../../lib/queries'
 import Header from "../../components/Header"
 import EmblaCarousel from '../../components/EmblaCarousel'
 import Image from "next/image"
+import Link from "next/link"
 
-const FILTERED_QUERY = `query projectBySlug($slug: String) {
-    project(filter: {slug: {eq: $slug}}) {
+const FILTERED_QUERY = `{
+    allProjects {
         titulo
         slug
         imagens {
@@ -22,13 +23,13 @@ const FILTERED_QUERY = `query projectBySlug($slug: String) {
 }`
 function size(size) {
     if (size === 'small') {
-        return 'w-[20vw] h-[20vw] m-20'
+        return 'w-[40vw] h-[40vw] md:w-[20vw] md:h-[20vw] md:m-20'
     }
     if (size === 'medium') {
-        return 'w-[30vw] h-[30vw] m-10'
+        return 'w-[55vw] h-[55vw] md:w-[30vw] md:h-[30vw] md:m-10'
     }
     if (size === 'large') {
-        return 'w-[42vw] h-[42vw]'
+        return 'w-[103vw] h-[50vh] md:w-[42vw] md:h-[42vw]'
     }
 }
 
@@ -44,7 +45,9 @@ function align(align) {
     }
 }
 
-export default function Project({ data, projects, books }) {
+
+
+export default function Project({ data, projects, books, moreProjects }) {
     return (
         <>
         <Header projects={projects} books={books} />
@@ -61,18 +64,18 @@ export default function Project({ data, projects, books }) {
                 ))}
         </EmblaCarousel>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 3xl:mt-5">
+        <div className="mx-8 grid grid-cols-2 justify-center items-center md:justify-start md:items-start md:mx-0 md:grid-cols-3 3xl:mt-5">
             <div className="md:hidden text-center text-lg font-bold 2xl:text-xl 3xl:text-2xl">{data.titulo}</div>
             <div className="font-decay text-center text-sm 3xl:text-lg">
                 <div>{data.ano}</div>
                 <div>{data.local}</div>
             </div>
             <div className="hidden md:block text-center text-lg font-bold 2xl:text-xl 3xl:text-2xl">{data.titulo}</div>
-            <div dangerouslySetInnerHTML={{__html: data.texto}} className='paragraph mx-8 mt-10 col-span-2 md:mt-0 md:ml-0 md:col-span-1 md:mr-20 2xl:mr-36 3xl:text-xl 3xl:mr-56'/>
+            <div dangerouslySetInnerHTML={{__html: data.texto}} className='paragraph mt-10 col-span-2 md:mt-0 md:ml-0 md:col-span-1 md:mr-20 2xl:mr-36 3xl:text-xl 3xl:mr-56'/>
         </div>
-        <div className="font-decay flex justify-between mx-14 text-sm my-12 3xl:text-lg 3xl:my-16">
-            <div className="hover:underline">projeto anterior</div>
-            <div className="hover:underline">projeto seguinte</div>
+        <div className="font-decay flex justify-between mx-8 md:mx-14 text-sm my-12 3xl:text-lg 3xl:my-16">
+            <Link href={moreProjects[0].slug}><div className="hover:underline">projeto anterior</div></Link>
+            <Link href={moreProjects[1].slug}><div className="hover:underline">projeto seguinte</div></Link>
         </div>
         </>
     )
@@ -99,15 +102,30 @@ export async function getStaticProps({ params }) {
         query: FILTERED_QUERY,
         variables: { slug: params.slug },
     })
-    const project = await request({
+
+    const projects = data.allProjects;
+
+    const currentProject = projects.find((project) => project.slug === params.slug);
+    const currentProjectIndex = projects.findIndex((project) => project.slug === params.slug);
+    const prevProject = projects[currentProjectIndex - 1] || projects[projects.length - 1];
+    const nextProject = projects[currentProjectIndex + 1] || projects[0];
+
+    if (!currentProject) {
+        return {
+            project: false,
+        };
+    }
+
+    const headerData = await request({
         query: PROJECTS_QUERY,
     })
 
     return {
         props: {
-            data: data.project,
-            projects: project.allProjects,
-            books: project.allLivros,
+            data: currentProject,
+            moreProjects: [prevProject, nextProject],
+            projects: headerData.allProjects,
+            books: headerData.allLivros,
         },
     }
 }

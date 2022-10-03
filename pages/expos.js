@@ -6,13 +6,13 @@ import Image from "next/image"
 
 function size(size) {
     if (size === 'small') {
-        return 'w-[20vw] h-fit m-20'
+        return 'w-[40vw] md:w-[20vw] h-fit md:m-20'
     }
     if (size === 'medium') {
-        return 'w-[30vw] h-fit m-10'
+        return 'w-[55vw] md:w-[30vw] h-fit md:m-10'
     }
     if (size === 'large') {
-        return 'w-[42vw] h-fit'
+        return 'w-[103vw] md:w-[42vw] h-fit'
     }
 }
 
@@ -45,12 +45,13 @@ return (
                 ))}
         </EmblaCarousel>
         </div>
-        <div className="grid grid-cols-3 mb-16 3xl:mt-5 3xl:mb-24">
+        <div className="grid grid-cols-1 mx-8 md:mx-0 md:grid-cols-3 mb-16 3xl:mt-5 3xl:mb-24">
+        <div className="md:hidden text-center mb-10 text-lg font-bold 2xl:text-xl 3xl:text-2xl">{data.titulo}</div>
             <div className="font-decay text-center text-sm 3xl:text-lg">
                 <div dangerouslySetInnerHTML={{__html: data.lista}} className='paragraph'/>
             </div>
-            <div className="text-center text-lg font-bold 2xl:text-xl 3xl:text-2xl">{data.titulo}</div>
-            <div dangerouslySetInnerHTML={{__html: data.texto}} className='paragraph mr-20 2xl:mr-36 3xl:text-xl 3xl:mr-56'/>
+            <div className="hidden md:block text-center text-lg font-bold 2xl:text-xl 3xl:text-2xl">{data.titulo}</div>
+            <div dangerouslySetInnerHTML={{__html: data.texto}} className='paragraph mt-10 md:mt-0 md:ml-0 md:mr-20 2xl:mr-36 3xl:text-xl 3xl:mr-56'/>
         </div>
     </>
 )
