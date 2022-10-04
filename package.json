@@ -11,7 +11,7 @@
   "dependencies": {
     "embla-carousel-react": "^7.0.3",
     "embla-carousel-wheel-gestures": "^3.0.0",
-    "fslightbox-react": "^1.6.2-2",
+    "fslightbox-react": "file:src/lib/fslightbox-react-pro-1.5.1-2.tgz",
     "graphql": "^16.6.0",
     "graphql-request": "^5.0.0",
     "lightgallery": "^2.6.1",

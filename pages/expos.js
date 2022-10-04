@@ -29,6 +29,19 @@ function align(align) {
 }
 
 export default function Expos({ data, projects, books }) {
+    const [lightboxController, setLightboxController] = useState({ 
+        toggler: false, 
+        slide: 1 
+        }); 
+        
+        function openLightboxOnSlide(number) { 
+            setLightboxController({ 
+                toggler: !lightboxController.toggler, 
+                slide: number 
+            }); 
+        }         
+
+    const allImages = data.imagens.map((img) => img.imagem.url)
 return (
     <>
     <Header projects={projects} books={books} />
@@ -37,7 +50,7 @@ return (
                 {data.imagens.map((w, i) => (
                     <div className="embla__slide__books flex" key={i}>
                         
-                        <div className={`relative ${size(w.tamanho)} ${align(w.alinhamento)}`}>
+                        <div className={`relative ${size(w.tamanho)} ${align(w.alinhamento)}`} onClick={() => openLightboxOnSlide(i + 1)}>
                             <Image src={w.imagem.url} width={w.imagem.width} height={w.imagem.height} objectFit='cover' />
                         </div>
                         
@@ -45,6 +58,19 @@ return (
                 ))}
         </EmblaCarousel>
         </div>
+        <FsLightbox 
+            toggler={lightboxController.toggler} 
+            sources={allImages} 
+            slide={lightboxController.slide} 
+            svg={{
+                slideButtons: {
+                    previous: {
+                        viewBox: '0 0 100 100',
+                        d: 'M71 3L29 52.5L71 96.5'
+                    },
+                }
+            }}
+        /> 
         <div className="grid grid-cols-1 mx-8 md:mx-0 md:grid-cols-3 mb-16 3xl:mt-5 3xl:mb-24">
         <div className="md:hidden text-center mb-10 text-lg font-bold 2xl:text-xl 3xl:text-2xl">{data.titulo}</div>
             <div className="font-decay text-center text-sm 3xl:text-lg">

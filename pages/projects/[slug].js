@@ -33,7 +33,7 @@ function size(size) {
         return 'w-[55vw] h-[55vw] md:w-[30vw] md:h-[30vw] md:m-10'
     }
     if (size === 'large') {
-        return 'w-[103vw] h-[50vh] md:w-[42vw] md:h-[42vw]'
+        return 'w-[103vw] h-[50vh] md:w-[40vw] md:h-[40vw]'
     }
 }
 
@@ -67,7 +67,7 @@ export default function Project({ data, projects, books, moreProjects }) {
     return (
         <>
         <Header projects={projects} books={books} />
-        <div className="mt-[-1em] 2xl:mt-5">
+        <div className="mt-[-1em] 2xl:mt-0">
         <EmblaCarousel>
                 {data.imagens.map((w, i) => (
                     <div className="embla__slide" key={i}>
@@ -82,11 +82,22 @@ export default function Project({ data, projects, books, moreProjects }) {
             toggler={lightboxController.toggler} 
             sources={allImages} 
             slide={lightboxController.slide} 
+            disableThumbs={true} 
+            disableZoom={true}
             svg={{
                 slideButtons: {
                     previous: {
-                        d: 'M71 3L29 52.5L71 96.5'
+                        width: '30px', 
+                        height: '30px',
+                        viewBox: '0 0 14.91 27.74',
+                        d: 'M13.33,27.74L.2,14.61c-.26-.26-.26-.68,0-.94L13.86,0c.91,.92,1,.82,.84,.98L1.56,14.18l12.74,12.64'
                     },
+                    next: {
+                        width: '30px', 
+                        height: '30px',
+                        viewBox: '0 0 14.91 27.74',
+                        d: 'M1.44,0L14.57,13.13c.26,.26,.26,.68,0,.94L.9,27.74c-.91-.92-1-.82-.84-.98L13.21,13.56,.47,.93'
+                    }
                 }
             }}
         /> 
