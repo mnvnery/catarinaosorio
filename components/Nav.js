@@ -92,7 +92,7 @@ return (
                     href={`/projects/${project.slug}`}
                 >
                     <a
-                    className="cursor-pointer leading-3 text-black tracking-widest">{project.titulo}
+                    className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{project.titulo}
                     </a>
                 </Link>
                 </div>
@@ -105,14 +105,14 @@ return (
                     href={`/projects/${project.slug}`}
                 >
                     <a
-                    className="cursor-pointer leading-3 text-black tracking-widest">{project.titulo}
+                    className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{project.titulo}
                     </a>
                 </Link>
                 </div>
             ))}
         </div>
         <div className='mt-8'>
-            <div><button onClick={onToggleSubNav} className="leading-3 text-black font-decay tracking-widest">Livros</button></div>
+            <div><button onClick={onToggleSubNav} className="cursor-pointer hover:underline leading-3 text-black font-decay tracking-widest">Livros</button></div>
             <div className={`${subNavShow ? 'block' : 'hidden'} mb-5 mt-2`}>
                 {books.map((book, i) => (
                     <div key={i} className="px-5">
@@ -120,18 +120,18 @@ return (
                         href={`/books/${book.slug}`}
                     >
                         <a
-                        className="cursor-pointer leading-3 text-black tracking-widest">{book.titulo}
+                        className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{book.titulo}
                         </a>
                     </Link>
                     </div>
                 ))}
             </div>
-            <div><Link href='/expos'><a className="cursor-pointer leading-3 text-black font-decay tracking-widest">Exposições</a></Link></div>
-            <div><Link href='/textos'><a className="cursor-pointer leading-3 text-black font-decay tracking-widest">Textos</a></Link></div>
+            <div><Link href='/expos'><a className="cursor-pointer hover:underline leading-3 text-black font-decay tracking-widest">Exposições</a></Link></div>
+            <div><Link href='/textos'><a className="cursor-pointer hover:underline leading-3 text-black font-decay tracking-widest">Textos</a></Link></div>
         </div>
         <div className='mt-3'>
-            <div><Link href='/contacts'><a className='cursor-pointer leading-3 font-decay tracking-widest'>Bio</a></Link></div>
-            <div><Link href='/contacts'><a className='cursor-pointer leading-3 font-decay tracking-widest'>Contactos</a></Link></div>
+            <div><Link href='/contacts'><a className='cursor-pointer hover:underline leading-3 font-decay tracking-widest'>Bio</a></Link></div>
+            <div><Link href='/contacts'><a className='cursor-pointer hover:underline leading-3 font-decay tracking-widest'>Contactos</a></Link></div>
         </div>
     </nav>
     </div>

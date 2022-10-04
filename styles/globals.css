@@ -133,3 +133,30 @@ a {
 .embla__button--next {
   right: 27px;
 }
+
+
+.fslightbox-container {
+  background: linear-gradient(rgba(253,247,237,.9),#000 1810%) !important;
+  backdrop-filter: blur(5px);
+  border: 1px solid  rgb(253 186 116) !important;
+}
+
+.fslightbox-toolbar, .fslightbox-slide-btn {
+  background: transparent !important;
+}
+
+.fslightbox-toolbar-button:hover .fslightbox-svg-path {
+  fill: rgb(253 186 116) !important;
+}
+
+.fslightbox-svg-path {
+  fill: rgb(253 186 116) !important;
+}
+
+.fslightbox-slide-number-container {
+  color: rgb(253 186 116) !important;
+}
+
+.fslightbox-slash {
+  background: rgb(253 186 116) !important;
+}

@@ -31,7 +31,9 @@ export default function EmblaCarousel({ children }) {
         return (
             <div className="embla pb-10">
             <div className="embla__viewport" ref={viewportRef}>
-                <div className="embla__container">{children}</div>
+            <div className="embla__container">
+                {children}
+                </div>
             </div>
         <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
         <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
