@@ -3,6 +3,8 @@ import { PROJECTS_QUERY } from '../../lib/queries'
 import Header from "../../components/Header"
 import EmblaCarousel from '../../components/EmblaCarousel'
 import Image from "next/image"
+import { useState } from "react"
+import FsLightbox from 'fslightbox-react'; 
 
 const FILTERED_QUERY = `query livroBySlug($slug: String) {
     livro(filter: {slug: {eq: $slug}}) {
