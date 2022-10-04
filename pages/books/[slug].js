@@ -47,15 +47,29 @@ function align(align) {
 }
 
 export default function Project({ data, projects, books }) {
+    const [lightboxController, setLightboxController] = useState({ 
+        toggler: false, 
+        slide: 1 
+        }); 
+        
+        function openLightboxOnSlide(number) { 
+            setLightboxController({ 
+                toggler: !lightboxController.toggler, 
+                slide: number 
+            }); 
+        }         
+
+    const allImages = data.imagens.map((img) => img.imagem.url)
+    
     return (
         <>
         <Header projects={projects} books={books} />
-        <div className="mt-[-1em] 2xl:mt-5">
+        <div className="mt-[-1em] 2xl:mt-0">
         <EmblaCarousel>
                 {data.imagens.map((w, i) => (
                     <div className="embla__slide__books flex" key={i}>
                         
-                        <div className={`relative ${size(w.tamanho)} ${align(w.alinhamento)}`}>
+                        <div className={`relative ${size(w.tamanho)} ${align(w.alinhamento)}`} onClick={() => openLightboxOnSlide(i + 1)}>
                             <Image src={w.imagem.url} width={w.imagem.width} height={w.imagem.height} objectFit='cover' />
                         </div>
                         
@@ -63,6 +77,19 @@ export default function Project({ data, projects, books }) {
                 ))}
         </EmblaCarousel>
         </div>
+        <FsLightbox 
+            toggler={lightboxController.toggler} 
+            sources={allImages} 
+            slide={lightboxController.slide} 
+            svg={{
+                slideButtons: {
+                    previous: {
+                        viewBox: '0 0 100 100',
+                        d: 'M71 3L29 52.5L71 96.5'
+                    },
+                }
+            }}
+        /> 
         <div className="mx-8 grid grid-cols-2 justify-center items-center md:justify-start md:items-start md:grid-cols-3 md:mx-0 mb-14 3xl:mb-24 3xl:mt-5">
         <div className="md:hidden text-center text-lg font-bold 2xl:text-xl 3xl:text-2xl">{data.titulo}</div>
             <div className="font-decay text-center text-sm 3xl:text-lg">
