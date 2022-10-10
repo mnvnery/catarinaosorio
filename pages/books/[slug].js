@@ -86,10 +86,18 @@ export default function Project({ data, projects, books }) {
             svg={{
                 slideButtons: {
                     previous: {
-                        viewBox: '0 0 100 100',
-                        d: 'M71 3L29 52.5L71 96.5'
+                        width: '30px', 
+                        height: '30px',
+                        viewBox: '0 0 14.91 27.74',
+                        d: 'M13.33,27.74L.2,14.61c-.26-.26-.26-.68,0-.94L13.86,0c.91,.92,1,.82,.84,.98L1.56,14.18l12.74,12.64'
                     },
-                }
+                    next: {
+                        width: '30px', 
+                        height: '30px',
+                        viewBox: '0 0 14.91 27.74',
+                        d: 'M1.44,0L14.57,13.13c.26,.26,.26,.68,0,.94L.9,27.74c-.91-.92-1-.82-.84-.98L13.21,13.56,.47,.93'
+                    }
+                } 
             }}
         /> 
         <div className="mx-8 grid grid-cols-2 justify-center items-center md:justify-start md:items-start md:grid-cols-3 md:mx-0 mb-14 3xl:mb-24 3xl:mt-5">

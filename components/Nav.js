@@ -59,7 +59,7 @@ return (
     </button>
     {setNavShow &&(
     <div
-    className={`fixed top-2 md:absolute md:top-0 right-1.5 md:right-2.5 z-20 min-w-60 pb-10 min-w-[97vw] md:min-w-[28vw] 3xl:min-w-[22vw] 3xl:pb-14 transform bg-orange-50 border border-orange-200 fill-white text-black duration-300 ease-in-out ${
+    className={`fixed top-2 md:absolute md:top-0 right-1.5 md:right-2.5 z-20 min-w-60 pb-10 min-w-[97vw] md:min-w-[28vw] 3xl:min-w-[22vw] 3xl:pb-14 transform bg-[#FEFCF9] border border-orange-200 fill-white text-black duration-300 ease-in-out ${
         navShow ? 'block' : 'hidden'
     }`} ref={ref}
     >
@@ -92,7 +92,7 @@ return (
                     href={`/projects/${project.slug}`}
                 >
                     <a
-                    className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{project.titulo}
+                    onClick={() => setNavShow(false)} className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{project.titulo}
                     </a>
                 </Link>
                 </div>
