@@ -38,7 +38,7 @@ export default function Textos({textos, projects, books}) {
     const [selectedTitle, setSelectedTitle] = useState()
 
     useEffect(() => {
-        setFilteredTexts(null)
+        setFilteredTexts(getTexts())
     }, [])
 
     function handleTag(e) {
@@ -47,7 +47,7 @@ export default function Textos({textos, projects, books}) {
             setFilteredTexts(filterTexts(textTitle))
             setSelectedTitle(textTitle)
         } else {
-            setFilteredTexts(null)
+            setFilteredTexts(getTexts())
             setSelectedTitle('')
         }
     }
