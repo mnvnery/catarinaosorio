@@ -39,7 +39,7 @@ function size(size) {
 
 function align(align) {
     if (align === 'top') {
-        return 'self-start mt-[16vh]'
+        return 'self-start mt-[2vh]'
     }
     if (align === 'middle') {
         return 'self-center'
