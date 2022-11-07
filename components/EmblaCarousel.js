@@ -3,6 +3,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { PrevButton, NextButton } from "./EmblaCarouselButtons";
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 
+
 export default function EmblaCarousel({ children }) {
     const wheelGestures = WheelGesturesPlugin()
     const [viewportRef, embla] = useEmblaCarousel({
@@ -11,6 +12,9 @@ export default function EmblaCarousel({ children }) {
         loop: true,
         align: 'start',
         }, [wheelGestures]);
+
+        
+
         const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
         const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
         

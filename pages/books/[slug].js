@@ -5,6 +5,8 @@ import EmblaCarousel from '../../components/EmblaCarousel'
 import Image from "next/image"
 import { useState } from "react"
 import FsLightbox from 'fslightbox-react'; 
+import { useRouter } from 'next/router';
+
 
 const FILTERED_QUERY = `query livroBySlug($slug: String) {
     livro(filter: {slug: {eq: $slug}}) {
@@ -49,6 +51,7 @@ function align(align) {
 }
 
 export default function Project({ data, projects, books }) {
+    const { locale, locales, asPath } = useRouter().locale
     const [lightboxController, setLightboxController] = useState({ 
         toggler: false, 
         slide: 1 
@@ -112,30 +115,56 @@ export default function Project({ data, projects, books }) {
         </>
     )
 }
-export async function getStaticPaths() {
-    const data = await request({
-        query: PROJECTS_QUERY,
-    })
+export async function getStaticPaths({locales}) {
+    const data = await request({ query: `{ allLivros { slug } }` });
+    const pathsArray = [];
+    data.allLivros.map((livro) => {
+        locales.map((language) => {
+        pathsArray.push({ params: { slug: livro.slug }, locale: language });
+        });
+    });
 
     return {
-        paths: data.allLivros.map((book) => {
-        return {
-            params: {
-            slug: book.slug,
-            },
-        }
-        }),
+        paths: pathsArray,
         fallback: false,
-    }
-    }
+    };
+}
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, locale }) {
+    const formattedLocale = locale;
     const data = await request({
-        query: FILTERED_QUERY,
+        query: `query livroBySlug($slug: String) {
+            livro(filter: {slug: {eq: $slug}}, locale: ${formattedLocale}) {
+                texto
+                titulo
+                imagens {
+                    imagem {
+                        url
+                        width
+                        height
+                    }
+                    tamanho
+                    alinhamento
+                }
+                slug
+                ano
+                editor
+            }
+        }`,
         variables: { slug: params.slug },
     })
     const project = await request({
-        query: PROJECTS_QUERY,
+        query: `{
+            allProjects(locale: ${formattedLocale}) {
+                slug
+                titulo
+                lista
+            }
+            allLivros(locale: ${formattedLocale}) {
+                slug
+                titulo
+            }
+        }`
     })
 
     return {

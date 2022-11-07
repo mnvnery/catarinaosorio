@@ -3,15 +3,33 @@ import Image from "next/image"
 import { PROJECTS_QUERY, TEXTOS_QUERY } from '../lib/queries'
 import Header from "../components/Header"
 import { useState, useEffect } from "react"
+import { useRouter } from 'next/router';
 
 
-export async function getStaticProps() {
-const textos = await request({
-    query: TEXTOS_QUERY,
-})
+export async function getStaticProps({locale}) {
+    const formattedLocale = locale;
 
-const project = await request({
-    query: PROJECTS_QUERY,
+    const textos = await request({
+        query: `{
+            allTexts(locale: ${formattedLocale}) {
+                texto
+                titulo
+            }
+        }`
+    })
+
+    const project = await request({
+        query: `{
+            allProjects(locale: ${formattedLocale}) {
+                slug
+                titulo
+                lista
+            }
+            allLivros(locale: ${formattedLocale}) {
+                slug
+                titulo
+            }
+        }`
 })
 
 
@@ -25,6 +43,8 @@ return {
 }
 
 export default function Textos({textos, projects, books}) {
+    const { locale, locales, asPath } = useRouter().locale;
+
     function getTexts() {
         return textos
     }

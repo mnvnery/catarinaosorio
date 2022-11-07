@@ -5,6 +5,7 @@ import EmblaCarousel from "../components/EmblaCarousel"
 import Image from "next/image"
 import { useState } from "react"
 import FsLightbox from 'fslightbox-react'; 
+import { useRouter } from 'next/router';
 
 function size(size) {
     if (size === 'small') {
@@ -31,6 +32,9 @@ function align(align) {
 }
 
 export default function Expos({ data, projects, books }) {
+
+    const { locale, locales, asPath } = useRouter().locale;
+
     const [lightboxController, setLightboxController] = useState({ 
         toggler: false, 
         slide: 1 
@@ -93,14 +97,39 @@ return (
 )
 }
 
-export async function getStaticProps() {
-
+export async function getStaticProps({locale}) {
+    const formattedLocale = locale;
     const project = await request({
-        query: PROJECTS_QUERY,
+        query: `{
+            allProjects(locale: ${formattedLocale}) {
+                slug
+                titulo
+                lista
+            }
+        allLivros(locale: ${formattedLocale}) {
+                slug
+                titulo
+            }
+        }`
     })
 
     const data = await request({
-        query: EXPO_QUERY,
+        query: `{
+            expo(locale: ${formattedLocale}) {
+                titulo
+                texto
+                lista
+                imagens {
+                    imagem {
+                    width
+                    height
+                    url
+                    }
+                    tamanho
+                    alinhamento
+                }
+                }
+            }`
     })
 
 

@@ -169,7 +169,6 @@ a {
 .fslightbox-toolbar-button:nth-child(2), .fslightbox-toolbar-button:nth-child(3), .fslightbox-toolbar-button:nth-child(1), .fslightbox-toolbar-button:nth-child(4)  {
   display: none;
 }
-
 @media only screen and (max-width: 768px) {
   .fslightbox-source {
     height: 55vh !important;

@@ -2,29 +2,51 @@ import { request } from "../lib/datocms"
 import Image from "next/image"
 import { PROJECTS_QUERY, CONTACTS_QUERY } from '../lib/queries'
 import Header from "../components/Header"
+import { useRouter } from 'next/router';
 
 
-export async function getStaticProps() {
-const contacts = await request({
-    query: CONTACTS_QUERY,
-})
+export async function getStaticProps({locale}) {
+    const formattedLocale = locale;
+    const contacts = await request({
+        query: `{
+            contact {
+                bio
+                email
+                telefone
+                imagem {
+                    url
+                }
+            }
+        }`
+    })
 
-const project = await request({
-    query: PROJECTS_QUERY,
-})
+    const project = await request({
+        query: `{
+            allProjects(locale: ${formattedLocale}) {
+                slug
+                titulo
+                lista
+            }
+            allLivros(locale: ${formattedLocale}) {
+                slug
+                titulo
+            }
+        }`
+    })
 
 
-return {
-    props: {
-        contacts: contacts.contact,
-        projects: project.allProjects,
-        books: project.allLivros,
-    },
-}
+    return {
+        props: {
+            contacts: contacts.contact,
+            projects: project.allProjects,
+            books: project.allLivros,
+        },
+    }
 }
 
 export default function Contacts({contacts, projects, books}) {
-
+    const { locale, locales, asPath } = useRouter().locale;
+    
     return (
         <>
         <Header projects={projects} books={books} />

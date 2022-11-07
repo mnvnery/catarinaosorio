@@ -3,9 +3,14 @@ import Link from 'next/link'
 import headerNavLinks from '../data/headerNavLinks'
 import Image from 'next/image'
 import siteMetadata from '../data/siteMetadata'
+import { useRouter } from 'next/router';
 
 
 const Nav = ({projects, books}) => {
+const router = useRouter();
+
+const { locale } = useRouter();
+
 const [navShow, setNavShow] = useState(false)
 
 
@@ -34,6 +39,10 @@ useEffect(() => {
         document.removeEventListener("mousedown", checkIfClickedOutside)
     }
 }, [navShow])
+
+const forceReload = () => {
+    router.reload();
+}
 
 return (
 <div>
@@ -92,7 +101,7 @@ return (
                     href={`/projects/${project.slug}`}
                 >
                     <a
-                    onClick={() => setNavShow(false)} className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{project.titulo}
+                    onClick={() => { setNavShow(false)}} className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{project.titulo}
                     </a>
                 </Link>
                 </div>
@@ -105,7 +114,7 @@ return (
                     href={`/projects/${project.slug}`}
                 >
                     <a
-                    className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{project.titulo}
+                        onClick={() => { setNavShow(false)}} className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{project.titulo}
                     </a>
                 </Link>
                 </div>
@@ -120,18 +129,18 @@ return (
                         href={`/books/${book.slug}`}
                     >
                         <a
-                        className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{book.titulo}
+                            className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{book.titulo}
                         </a>
                     </Link>
                     </div>
                 ))}
             </div>
-            <div><Link href='/expos'><a className="cursor-pointer hover:underline leading-3 text-black font-decay tracking-widest">Exposições</a></Link></div>
-            <div><Link href='/textos'><a className="cursor-pointer hover:underline leading-3 text-black font-decay tracking-widest">Textos</a></Link></div>
+            <div><Link href='/expos'><a className={`cursor-pointer hover:underline leading-3 text-black font-decay tracking-widest ${router.pathname == '/expos' ? 'underline' : ''}`}>{locale === 'pt' ? 'Exposições' : 'Exibitions'}</a></Link></div>
+            <div><Link href='/textos'><a className={`cursor-pointer hover:underline leading-3 text-black font-decay tracking-widest ${router.pathname == '/textos' ? 'underline' : ''}`}>{locale === 'pt' ? 'Textos' : 'Texts'}</a></Link></div>
         </div>
         <div className='mt-3'>
-            <div><Link href='/contacts'><a className='cursor-pointer hover:underline leading-3 font-decay tracking-widest'>Bio</a></Link></div>
-            <div><Link href='/contacts'><a className='cursor-pointer hover:underline leading-3 font-decay tracking-widest'>Contactos</a></Link></div>
+            <div><Link href='/contacts'><a className={`cursor-pointer hover:underline leading-3 font-decay tracking-widest ${router.pathname == '/contacts' ? 'underline' : ''}`}>Bio</a></Link></div>
+            <div><Link href='/contacts'><a className={`cursor-pointer hover:underline leading-3 font-decay tracking-widest ${router.pathname == '/contacts' ? 'underline' : ''}`}>{locale === 'pt' ? 'Contactos' : 'Contacts'}</a></Link></div>
         </div>
     </nav>
     </div>
