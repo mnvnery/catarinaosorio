@@ -93,8 +93,8 @@ export default function Project({ data, projects, books, moreProjects }) {
                 <div>{data.local}</div>
             </div>
             <div className="hidden md:block text-center text-lg font-bold 2xl:text-xl 3xl:text-2xl">{data.titulo}</div>
-            <div>
-            <div dangerouslySetInnerHTML={{__html: data.texto}} className='paragraph mt-10 col-span-2 md:mt-0 md:ml-0 md:col-span-1 md:mr-20 2xl:mr-36 3xl:text-xl 3xl:mr-56'/>
+            <div className="col-span-2 md:col-span-1">
+            <div dangerouslySetInnerHTML={{__html: data.texto}} className='paragraph mt-10  md:mt-0 md:ml-0 md:mr-20 2xl:mr-36 3xl:text-xl 3xl:mr-56'/>
             {data.text === null 
                 ? ''
                 : <Link href='/textos'><a className="font-decay text-2xl hover:text-orange-200">+</a></Link>
