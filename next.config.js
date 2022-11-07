@@ -5,12 +5,10 @@ const nextConfig = {
   images: {
     domains: ['www.datocms-assets.com'],
   },
-  // i18n: {
-      // providing the locales supported by your application
-   // locales: ["en", "pt"],
-    //  default locale used when the non-locale paths are visited
-   // defaultLocale: "pt",
-  //},
+  i18n: {
+      locales: ["en", "pt"],
+      defaultLocale: "pt",
+  },
 }
 
 module.exports = nextConfig

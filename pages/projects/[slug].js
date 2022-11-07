@@ -4,27 +4,11 @@ import Header from "../../components/Header"
 import EmblaCarousel from '../../components/EmblaCarousel'
 import Image from "next/image"
 import Link from "next/link"
-import dynamic from 'next/dynamic';
 import { useState } from "react"
 import FsLightbox from 'fslightbox-react'; 
+import { useRouter } from 'next/router';
 
 
-const FILTERED_QUERY = `{
-    allProjects {
-        titulo
-        slug
-        imagens {
-            imagem {
-            url
-            }
-            tamanho
-            alinhamento
-        }
-        ano
-        local
-        texto
-    }
-}`
 function size(size) {
     if (size === 'small') {
         return 'w-[40vw] h-[40vw] md:w-[20vw] md:h-[20vw] md:m-20'
@@ -49,8 +33,9 @@ function align(align) {
     }
 }
 
-
 export default function Project({ data, projects, books, moreProjects }) {
+    
+    const { locale, locales, asPath } = useRouter().locale
     const [lightboxController, setLightboxController] = useState({ 
         toggler: false, 
         slide: 1 
@@ -108,7 +93,13 @@ export default function Project({ data, projects, books, moreProjects }) {
                 <div>{data.local}</div>
             </div>
             <div className="hidden md:block text-center text-lg font-bold 2xl:text-xl 3xl:text-2xl">{data.titulo}</div>
-            <div dangerouslySetInnerHTML={{__html: data.texto}} className='paragraph mt-10 col-span-2 md:mt-0 md:ml-0 md:col-span-1 md:mr-20 2xl:mr-36 3xl:text-xl 3xl:mr-56'/>
+            <div className="col-span-2 md:col-span-1">
+            <div dangerouslySetInnerHTML={{__html: data.texto}} className='paragraph mt-10  md:mt-0 md:ml-0 md:mr-20 2xl:mr-36 3xl:text-xl 3xl:mr-56'/>
+            {data.text === null 
+                ? ''
+                : <Link href='/textos'><a className="font-decay text-2xl hover:text-orange-200">+</a></Link>
+            }
+            </div>
         </div>
         <div className="font-decay flex justify-between mx-8 md:mx-14 text-sm my-12 3xl:text-lg 3xl:my-16">
             <Link href={moreProjects[0].slug}><div className="hover:underline">projeto anterior</div></Link>
@@ -117,26 +108,43 @@ export default function Project({ data, projects, books, moreProjects }) {
         </>
     )
 }
-export async function getStaticPaths() {
-    const projects = await request({
-        query: PROJECTS_QUERY,
-    })
+export async function getStaticPaths({locales}) {
+    const data = await request({ query: `{ allProjects { slug } }` });
+    const pathsArray = [];
+    data.allProjects.map((post) => {
+        locales.map((language) => {
+        pathsArray.push({ params: { slug: post.slug }, locale: language });
+        });
+    });
 
     return {
-        paths: projects.allProjects.map((project) => {
-        return {
-            params: {
-            slug: project.slug,
-            },
-        }
-        }),
+        paths: pathsArray,
         fallback: false,
-    }
-    }
+    };
+}
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, locale }) {
+    const formattedLocale = locale;
     const data = await request({
-        query: FILTERED_QUERY,
+        query: `{
+            allProjects(locale: ${formattedLocale}) {
+                titulo
+                slug
+                imagens {
+                    imagem {
+                    url
+                    }
+                    tamanho
+                    alinhamento
+                }
+                text {
+                    texto
+                }
+                ano
+                local
+                texto
+            }
+        }`,
         variables: { slug: params.slug },
     })
 
@@ -154,7 +162,17 @@ export async function getStaticProps({ params }) {
     }
 
     const headerData = await request({
-        query: PROJECTS_QUERY,
+        query: `{
+            allProjects(locale: ${formattedLocale}) {
+                slug
+                titulo
+                lista
+            }
+            allLivros(locale: ${formattedLocale}) {
+                slug
+                titulo
+            }
+            }`
     })
 
     return {

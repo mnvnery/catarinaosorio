@@ -3,17 +3,29 @@ import Image from 'next/image'
 import { request } from '../lib/datocms'
 import { useState, useEffect } from 'react'
 import Header from '../components/Header'
-import { PROJECTS_QUERY, IMAGES_QUERY } from '../lib/queries'
+import { IMAGES_QUERY } from '../lib/queries'
 import FsLightbox from 'fslightbox-react'; 
+import { useRouter } from 'next/router';
 
 
-export async function getStaticProps() {
+export async function getStaticProps({locale}) {
+  const formattedLocale = locale;
   const img = await request({
     query: IMAGES_QUERY,
   })
 
   const project = await request({
-      query: PROJECTS_QUERY,
+    query: `{
+      allProjects(locale: ${formattedLocale}) {
+        slug
+        titulo
+        lista
+    }
+    allLivros(locale: ${formattedLocale}) {
+        slug
+        titulo
+    }
+  }`
   })
 
   return {
@@ -53,6 +65,9 @@ function align(align) {
 
 
 export default function Home({img, projects, books }) {
+
+  const { locale, locales, asPath } = useRouter().locale;
+
   const [randomArray, setRandomArray] = useState([]);
   useEffect(() => {
       const randomizeArray = img.imagens.sort(() => 0.5 - Math.random());
