@@ -11,13 +11,13 @@ import { useRouter } from 'next/router';
 
 function size(size) {
     if (size === 'small') {
-        return 'w-[40vw] h-[40vw] md:w-[20vw] md:h-[20vw] md:m-20'
+        return 'w-[40vw] h-fit md:w-[20vw] md:h-fit md:m-20'
     }
     if (size === 'medium') {
-        return 'w-[55vw] h-[55vw] md:w-[30vw] md:h-[30vw] md:m-10'
+        return 'w-[55vw] h-fit md:w-[30vw] md:h-fit md:m-10'
     }
     if (size === 'large') {
-        return 'w-[103vw] h-[50vh] md:w-[40vw] md:h-[40vw]'
+        return 'w-[103vw] h-fit md:w-[40vw] md:h-fit'
     }
 }
 
@@ -57,7 +57,7 @@ export default function Project({ data, projects, books, moreProjects }) {
                 {data.imagens.map((w, i) => (
                     <div className="embla__slide" key={i}>
                         <div className={`relative ${size(w.tamanho)} ${align(w.alinhamento)}`} onClick={() => openLightboxOnSlide(i + 1)}>
-                            <Image src={w.imagem.url} objectFit="cover" layout="fill" />
+                            <Image src={w.imagem.url} objectFit="cover" width={w.imagem.width} height={w.imagem.height} />
                         </div>
                     </div>
                 ))}
@@ -133,6 +133,8 @@ export async function getStaticProps({ params, locale }) {
                 imagens {
                     imagem {
                     url
+                    width
+                    height
                     }
                     tamanho
                     alinhamento
