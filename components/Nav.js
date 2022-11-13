@@ -121,7 +121,7 @@ return (
             ))}
         </div>
         <div className='mt-8'>
-            <div><button onClick={onToggleSubNav} className="cursor-pointer hover:underline leading-3 text-black font-decay tracking-widest">Livros</button></div>
+            <div><button onClick={onToggleSubNav} className="cursor-pointer hover:underline leading-3 text-black font-decay tracking-widest">{locale === 'pt' ? 'Livros' : 'Books'}</button></div>
             <div className={`${subNavShow ? 'block' : 'hidden'} mb-5 mt-2`}>
                 {books.map((book, i) => (
                     <div key={i} className="px-5">
@@ -140,7 +140,6 @@ return (
         </div>
         <div className='mt-3'>
             <div><Link href='/contacts'><a className={`cursor-pointer hover:underline leading-3 font-decay tracking-widest ${router.pathname == '/contacts' ? 'underline' : ''}`}>Bio</a></Link></div>
-            <div><Link href='/contacts'><a className={`cursor-pointer hover:underline leading-3 font-decay tracking-widest ${router.pathname == '/contacts' ? 'underline' : ''}`}>{locale === 'pt' ? 'Contactos' : 'Contacts'}</a></Link></div>
         </div>
     </nav>
     </div>

@@ -97,7 +97,7 @@ export default function Project({ data, projects, books, moreProjects }) {
             <div dangerouslySetInnerHTML={{__html: data.texto}} className='paragraph mt-10  md:mt-0 md:ml-0 md:mr-20 2xl:mr-36 3xl:text-xl 3xl:mr-56'/>
             {data.text === null 
                 ? ''
-                : <Link href='/textos'><a className="font-decay text-2xl hover:text-orange-200">+</a></Link>
+                : <Link href={`/textos/${data.text.slug}`}><a className="font-decay text-2xl hover:text-orange-200">+</a></Link>
             }
             </div>
         </div>
@@ -141,6 +141,7 @@ export async function getStaticProps({ params, locale }) {
                 }
                 text {
                     texto
+                    slug
                 }
                 ano
                 local
