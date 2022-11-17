@@ -58,7 +58,7 @@ export default function Contacts({contacts, projects, books}) {
                 <div><a href={`mailto:${contacts.email}`} className="hover:underline">{contacts.email}</a></div>
                 <div><a href={`tel:${contacts.telefone}`} className="hover:underline">{contacts.telefone}</a></div>
             </div>
-            <div className="relative w-[20vw] h-[20vw] md:w-[10vw] md:h-[10vw] my-10 md:mb-0 md:mt-2 mx-auto">
+            <div className="relative ml-10 w-[20vw] h-[20vw] md:w-[10vw] md:h-[10vw] my-10 md:mb-0 md:mt-2 md:mx-auto">
                 <Image src={contacts.imagem.url} objectFit='cover' layout='fill'/>
             </div>
             <div className="pb-14 mx-10 text-sm md:pb-0 2xl:text-lg 3xl:text-xl">
