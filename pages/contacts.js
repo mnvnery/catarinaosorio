@@ -64,7 +64,7 @@ export default function Contacts({contacts, projects, books}) {
             <div className="pb-14 mx-10 text-sm md:pb-0 2xl:text-lg 3xl:text-xl">
                 <div dangerouslySetInnerHTML={{__html: contacts.bio}} className='paragraph 3xl:mr-32'/>
                 {contacts.cv 
-                    ? <a href={contacts.cv.url} target="_blank"><div className="font-decay mt-10 hover:underline">CV</div></a>
+                    ? <a href={contacts.cv.url} target="_blank" rel="noreferrer"><div className="font-decay mt-10 hover:underline">CV</div></a>
                     : <div></div>
                 }
             </div>
