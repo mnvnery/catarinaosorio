@@ -97,26 +97,18 @@ return (
         <div>
             {projects.filter(project => project.lista == 'lista 1').map((project, i) => (
                 <div key={i} className="px-5 2xl:px-20">
-                <Link
-                    href={`/projects/${project.slug}`}
-                >
                     <a
-                    onClick={() => { setNavShow(false)}} className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{project.titulo}
+                    href={`https://www.catarinaosoriocastro.com/${locale}/projects/${project.slug}`} onClick={() => { setNavShow(false)}} className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{project.titulo}
                     </a>
-                </Link>
                 </div>
             ))}
         </div>
         <div className='mt-4 3xl:mt-6'>
             {projects.filter(project => project.lista == 'lista 2').map((project, i) => (
                 <div key={i} className="px-5 2xl:px-20">
-                <Link
-                    href={`/projects/${project.slug}`}
-                >
                     <a
-                        onClick={() => { setNavShow(false)}} className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{project.titulo}
+                        href={`https://www.catarinaosoriocastro.com/${locale}/projects/${project.slug}`} onClick={() => { setNavShow(false)}} className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{project.titulo}
                     </a>
-                </Link>
                 </div>
             ))}
         </div>
