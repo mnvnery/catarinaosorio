@@ -35,7 +35,7 @@ function align(align) {
 
 export default function Project({ data, projects, books, moreProjects }) {
     
-    const { locale, locales, asPath } = useRouter().locale
+    const { locale, locales, asPath } = useRouter()
     const [lightboxController, setLightboxController] = useState({ 
         toggler: false, 
         slide: 1 
