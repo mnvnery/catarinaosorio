@@ -49,6 +49,7 @@ export default function Project({ data, projects, books, moreProjects }) {
         }         
 
     const allImages = data.imagens.map((img) => img.imagem.url)
+    console.log(moreProjects[1].slug)
     return (
         <>
         <Header projects={projects} books={books} />
@@ -102,8 +103,8 @@ export default function Project({ data, projects, books, moreProjects }) {
             </div>
         </div>
         <div className="font-decay flex justify-between mx-8 md:mx-14 text-sm my-12 3xl:text-lg 3xl:my-16">
-            <Link href={moreProjects[0].slug}><div className="hover:underline">projeto anterior</div></Link>
-            <Link href={moreProjects[1].slug}><div className="hover:underline">projeto seguinte</div></Link>
+            <a href={`https://www.catarinaosoriocastro.com/${locale}/projects/${moreProjects[0].slug}`}><div className="hover:underline">projeto anterior</div></a>
+            <a href={`https://www.catarinaosoriocastro.com/${locale}/projects/${moreProjects[1].slug}`}><div className="hover:underline">projeto seguinte</div></a>
         </div>
         </>
     )

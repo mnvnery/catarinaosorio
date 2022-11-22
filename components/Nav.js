@@ -117,17 +117,13 @@ return (
             <div className={`${subNavShow ? 'block' : 'hidden'} mb-5 mt-2`}>
                 {books.map((book, i) => (
                     <div key={i} className="px-5">
-                    <Link
-                        href={`/books/${book.slug}`}
-                    >
                         <a
-                            className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{book.titulo}
+                            href={`https://www.catarinaosoriocastro.com/${locale}/books/${book.slug}`} className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{book.titulo}
                         </a>
-                    </Link>
                     </div>
                 ))}
             </div>
-            <div><Link href='/expos'><a className={`cursor-pointer hover:underline leading-3 text-black font-decay tracking-widest ${router.pathname == '/expos' ? 'underline' : ''}`}>{locale === 'pt' ? 'Exposições' : 'Exibitions'}</a></Link></div>
+            <div><a href={`https://www.catarinaosoriocastro.com/${locale}/expos`} className={`cursor-pointer hover:underline leading-3 text-black font-decay tracking-widest ${router.pathname == '/expos' ? 'underline' : ''}`}>{locale === 'pt' ? 'Exposições' : 'Exibitions'}</a></div>
             <div><Link href='/textos'><a className={`cursor-pointer hover:underline leading-3 text-black font-decay tracking-widest ${router.pathname == '/textos' ? 'underline' : ''}`}>{locale === 'pt' ? 'Textos' : 'Texts'}</a></Link></div>
         </div>
         <div className='mt-3'>
