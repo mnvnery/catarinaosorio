@@ -55,7 +55,7 @@ export default function Textos({textos, projects, books}) {
             <div className="font-decay mb-4 2xl:text-xl 3xl:text-2xl">{locale === 'pt' ? 'Textos' : 'Texts'}</div>
             {textos.map((t, i) => (
                 <div key={i} className={`leading-5 2xl:text-lg 3xl:text-xl`}>
-                    <Link href={`/textos/${t.slug}`}><a className="hover:underline">{t.titulo}</a></Link>
+                    <Link href={`/textos/${t.slug}`} className="hover:underline">{t.titulo}</Link>
                 </div>
             ))}
             

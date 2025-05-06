@@ -98,7 +98,7 @@ return (
             {projects.filter(project => project.lista == 'lista 1').map((project, i) => (
                 <div key={i} className="px-5 2xl:px-20">
                     <a
-                    href={`https://www.catarinaosoriocastro.com/${locale}/projects/${project.slug}`} onClick={() => { setNavShow(false)}} className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{project.titulo}
+                    href={`/${locale}/projects/${project.slug}`} onClick={() => { setNavShow(false)}} className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{project.titulo}
                     </a>
                 </div>
             ))}
@@ -107,7 +107,7 @@ return (
             {projects.filter(project => project.lista == 'lista 2').map((project, i) => (
                 <div key={i} className="px-5 2xl:px-20">
                     <a
-                        href={`https://www.catarinaosoriocastro.com/${locale}/projects/${project.slug}`} onClick={() => { setNavShow(false)}} className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{project.titulo}
+                        href={`/${locale}/projects/${project.slug}`} onClick={() => { setNavShow(false)}} className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{project.titulo}
                     </a>
                 </div>
             ))}
@@ -118,16 +118,24 @@ return (
                 {books.map((book, i) => (
                     <div key={i} className="px-5">
                         <a
-                            href={`https://www.catarinaosoriocastro.com/${locale}/books/${book.slug}`} className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{book.titulo}
+                            href={`/${locale}/books/${book.slug}`} className="cursor-pointer hover:underline leading-3 text-black tracking-widest">{book.titulo}
                         </a>
                     </div>
                 ))}
             </div>
-            <div><a href={`https://www.catarinaosoriocastro.com/${locale}/expos`} className={`cursor-pointer hover:underline leading-3 text-black font-decay tracking-widest ${router.pathname == '/expos' ? 'underline' : ''}`}>{locale === 'pt' ? 'Exposições' : 'Exibitions'}</a></div>
-            <div><Link href='/textos'><a className={`cursor-pointer hover:underline leading-3 text-black font-decay tracking-widest ${router.pathname == '/textos' ? 'underline' : ''}`}>{locale === 'pt' ? 'Textos' : 'Texts'}</a></Link></div>
+            <div><a href={`/${locale}/expos`} className={`cursor-pointer hover:underline leading-3 text-black font-decay tracking-widest ${router.pathname == '/expos' ? 'underline' : ''}`}>{locale === 'pt' ? 'Exposições' : 'Exibitions'}</a></div>
+            <div>
+                <Link href='/textos' className={`cursor-pointer hover:underline leading-3 text-black font-decay tracking-widest ${router.pathname == '/textos' ? 'underline' : ''}`}>
+                    {locale === 'pt' ? 'Textos' : 'Texts'}
+                </Link>
+            </div>
         </div>
         <div className='mt-3'>
-            <div><Link href='/contacts'><a className={`cursor-pointer hover:underline leading-3 font-decay tracking-widest ${router.pathname == '/contacts' ? 'underline' : ''}`}>Bio</a></Link></div>
+            <div>
+                <Link href='/contacts' className={`cursor-pointer hover:underline leading-3 font-decay tracking-widest ${router.pathname == '/contacts' ? 'underline' : ''}`}>
+                    Bio
+                </Link>
+            </div>
         </div>
     </nav>
     </div>

@@ -64,13 +64,14 @@ export default function Project({ data, projects, books }) {
             }); 
         }         
 
-    const allImages = data.imagens.map((img) => img.imagem.url)
+    const allImages = data.imagens?.map((img) => img.imagem.url) || []
     
     return (
         <>
         <Header projects={projects} books={books} />
         <div className="mt-[-1em] 2xl:mt-0">
-        <EmblaCarousel>
+        {data.imagens && data.imagens.length > 0 && (
+            <EmblaCarousel>
                 {data.imagens.map((w, i) => (
                     <div className="embla__slide__books flex" key={i}>
                         
@@ -80,29 +81,32 @@ export default function Project({ data, projects, books }) {
                         
                     </div>
                 ))}
-        </EmblaCarousel>
+            </EmblaCarousel>
+        )}
         </div>
-        <FsLightbox 
-            toggler={lightboxController.toggler} 
-            sources={allImages} 
-            slide={lightboxController.slide} 
-            svg={{
-                slideButtons: {
-                    previous: {
-                        width: '30px', 
-                        height: '30px',
-                        viewBox: '0 0 14.91 27.74',
-                        d: 'M13.33,27.74L.2,14.61c-.26-.26-.26-.68,0-.94L13.86,0c.91,.92,1,.82,.84,.98L1.56,14.18l12.74,12.64'
-                    },
-                    next: {
-                        width: '30px', 
-                        height: '30px',
-                        viewBox: '0 0 14.91 27.74',
-                        d: 'M1.44,0L14.57,13.13c.26,.26,.26,.68,0,.94L.9,27.74c-.91-.92-1-.82-.84-.98L13.21,13.56,.47,.93'
-                    }
-                } 
-            }}
-        /> 
+        {allImages.length > 0 && (
+            <FsLightbox 
+                toggler={lightboxController.toggler} 
+                sources={allImages} 
+                slide={lightboxController.slide} 
+                svg={{
+                    slideButtons: {
+                        previous: {
+                            width: '30px', 
+                            height: '30px',
+                            viewBox: '0 0 14.91 27.74',
+                            d: 'M13.33,27.74L.2,14.61c-.26-.26-.26-.68,0-.94L13.86,0c.91,.92,1,.82,.84,.98L1.56,14.18l12.74,12.64'
+                        },
+                        next: {
+                            width: '30px', 
+                            height: '30px',
+                            viewBox: '0 0 14.91 27.74',
+                            d: 'M1.44,0L14.57,13.13c.26,.26,.26,.68,0,.94L.9,27.74c-.91-.92-1-.82-.84-.98L13.21,13.56,.47,.93'
+                        }
+                    } 
+                }}
+            /> 
+        )}
         <div className="mx-8 grid grid-cols-2 justify-center items-center md:justify-start md:items-start md:grid-cols-3 md:mx-0 mb-14 3xl:mb-24 3xl:mt-5">
         <div className="md:hidden text-center text-lg font-bold 2xl:text-xl 3xl:text-2xl">{data.titulo}</div>
             <div className="font-decay text-center text-sm 3xl:text-lg">

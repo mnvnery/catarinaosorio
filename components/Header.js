@@ -11,14 +11,16 @@ const Header = ({projects, books}) => {
             <div className="font-decay text-xs 2xl:text-sm 3xl:text-base mt-1.5 uppercase">
                     {locales.map((l, i) => (
                         <span key={i}>
-                        <Link href={asPath} locale={l}>
-                            <a className={l === locale ? 'underline' : ''}>{l}</a>
+                        <Link href={asPath} locale={l} className={l === locale ? 'underline' : ''}>
+                            {l}
                         </Link>
                         <span className={l === 'pt' ? 'inline-block px-2' : 'hidden'}>/</span>
                     </span>
                     ))}
             </div>
-            <Link href='/'><a className="z-30 font font-grottaMedium text-lg md:text-xl md:z-0 2xl:text-2xl 3xl:text-3xl">Catarina Osório de Castro</a></Link>
+            <Link href='/' className="z-30 font font-grottaMedium text-lg md:text-xl md:z-0 2xl:text-2xl 3xl:text-3xl">
+                Catarina Osório de Castro
+            </Link>
             <Nav projects={projects} books={books} />
         </div>
         </>

@@ -20,7 +20,7 @@ export default function Project({ data, texts, projects, books }) {
             <div className="font-decay mb-4 2xl:text-xl 3xl:text-2xl">{locale === 'pt' ? 'Textos' : 'Texts'}</div>
             {texts.map((t, i) => (
                 <div key={i} className={`hover:underline leading-5 2xl:text-lg 3xl:text-xl`}>
-                    <Link href={`/textos/${t.slug}`}><a className={`${data.titulo === t.titulo ? 'underline' : '' }`}>{t.titulo}</a></Link>
+                    <Link href={`/textos/${t.slug}`} className={`${data.titulo === t.titulo ? 'underline' : '' }`}>{t.titulo}</Link>
                 </div>
             ))}
                 <div>
