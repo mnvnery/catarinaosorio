@@ -58,7 +58,7 @@ export default function Project({ data, projects, books, moreProjects }) {
                 {data.imagens.map((w, i) => (
                     <div className="embla__slide" key={i}>
                         <div className={`relative ${size(w.tamanho)} ${align(w.alinhamento)}`} onClick={() => openLightboxOnSlide(i + 1)}>
-                            <Image src={w.imagem.url} objectFit="cover" width={w.imagem.width} height={w.imagem.height} />
+                            <Image src={w.imagem.url} width={w.imagem.width} height={w.imagem.height} style={{ objectFit: 'cover' }} />
                         </div>
                     </div>
                 ))}

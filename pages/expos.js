@@ -57,7 +57,7 @@ return (
                     <div className="embla__slide__books flex" key={i}>
                         
                         <div className={`relative ${size(w.tamanho)} ${align(w.alinhamento)}`} onClick={() => openLightboxOnSlide(i + 1)}>
-                            <Image src={w.imagem.url} width={w.imagem.width} height={w.imagem.height} objectFit='cover' />
+                            <Image src={w.imagem.url} width={w.imagem.width} height={w.imagem.height} style={{ objectFit: 'cover' }} />
                         </div>
                         
                     </div>
